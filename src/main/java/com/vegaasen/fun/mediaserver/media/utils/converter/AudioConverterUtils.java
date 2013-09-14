@@ -1,4 +1,4 @@
-package com.vegaasen.fun.mediaserver.media.utils;
+package com.vegaasen.fun.mediaserver.media.utils.converter;
 
 import com.google.common.base.Strings;
 import com.mpatric.mp3agic.InvalidDataException;
