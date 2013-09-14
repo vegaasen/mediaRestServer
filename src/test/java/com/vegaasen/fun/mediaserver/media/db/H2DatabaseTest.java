@@ -1,35 +1,38 @@
 package com.vegaasen.fun.mediaserver.media.db;
 
-import org.junit.After;
+import com.vegaasen.fun.mediaserver.media.abs.AbstractDatabaseTest;
 import org.junit.Test;
 
-import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.*;
 
 /**
  * @author <a href="vegard.aasen@gmail.com">vegardaasen</a>
  */
-public class H2DatabaseTest {
+public class H2DatabaseTest extends AbstractDatabaseTest {
 
-    Connection connection;
+    String sql;
 
     @Test
-    public void testGetConnection() throws Exception {
-        H2Database h2db = H2Database.getInstance();
-        assertNotNull(h2db);
-        connection = H2Database.getInstance().getConnection();
-        assertNotNull(connection);
-        assertFalse(connection.isClosed());
-    }
-
-    @After
-    public void tearDown() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
+    public void shouldCreateAndThenDeleteTables() throws SQLException {
+        sql = String.format("INSERT INTO %s VALUES (1, 'Vegard Aasen', 'Some kind of description for Vegard Aasen')", THE_BOGUS_TABLE_ID);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        assertNotNull(statement);
+        statement.executeUpdate();
+        statement = getConnection().prepareStatement(SELECT_ALL_FROM_TABLE_BOGUS);
+        ResultSet resultSet = statement.executeQuery();
+        assertNotNull(resultSet);
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
+            assertNotNull(name);
+            String description = resultSet.getString("description");
+            assertNotNull(description);
         }
+        resultSet.close();
+        assertTrue(resultSet.isClosed());
     }
 
 }

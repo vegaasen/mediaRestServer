@@ -87,6 +87,17 @@ public final class DriveUtils {
         ignoreList.add(path);
     }
 
+    public static File getFile(final String path) {
+        if(!Strings.isNullOrEmpty(path)) {
+            throw new IllegalArgumentException("Cannot operate on a empty string.");
+        }
+        return new File(path);
+    }
+
+    public static boolean exists(final File file) {
+        return (file!=null && file.isFile() && file.exists() && file.canRead());
+    }
+
     private static boolean validateNotIgnored(final String path) {
         if (ignoreList.isEmpty()) {
             return true;

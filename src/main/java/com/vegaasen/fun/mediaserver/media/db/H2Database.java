@@ -50,9 +50,10 @@ public final class H2Database extends AbstractDatabase {
         return H2_CLASS;
     }
 
+    //todo: extract to db.properties or similar
     private static void initialize() {
         LOG.info("Initializing database and its connection..");
-        dataSource.setURL("jdbc:h2:˜/test");
+        dataSource.setURL("jdbc:h2:test;DB_CLOSE_DELAY=-1");
         dataSource.setUser("sa");
         dataSource.setPassword("sa");
         LOG.info("Database configured. Verifying connection..");

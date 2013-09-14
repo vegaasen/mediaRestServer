@@ -49,6 +49,7 @@
             <artifactId>h2</artifactId>
             <version>1.3.173</version>
         </dependency>
+        <!--MediaTypes-->
         <!--MP3 support-->
         <dependency>
             <groupId>com.mpatric</groupId>
