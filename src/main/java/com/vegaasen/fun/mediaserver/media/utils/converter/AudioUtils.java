@@ -15,9 +15,9 @@ import java.io.IOException;
  *
  * @author <a href="vegard.aasen@gmail.com">vegardaasen</a>
  */
-public final class AudioConverterUtils {
+public final class AudioUtils {
 
-    private AudioConverterUtils() {
+    private AudioUtils() {
     }
 
     public final static class Mp3 {

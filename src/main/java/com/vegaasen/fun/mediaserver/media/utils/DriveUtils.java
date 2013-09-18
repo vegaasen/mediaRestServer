@@ -3,6 +3,7 @@ package com.vegaasen.fun.mediaserver.media.utils;
 import com.google.common.base.Strings;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -88,14 +89,21 @@ public final class DriveUtils {
     }
 
     public static File getFile(final String path) {
-        if(!Strings.isNullOrEmpty(path)) {
+        if (Strings.isNullOrEmpty(path)) {
             throw new IllegalArgumentException("Cannot operate on a empty string.");
         }
         return new File(path);
     }
 
+    public static InputStream getFileFromResource(final String path) {
+        if (Strings.isNullOrEmpty(path)) {
+            throw new IllegalArgumentException("Cannot operate on a empty string.");
+        }
+        return DriveUtils.class.getResourceAsStream(path);
+    }
+
     public static boolean exists(final File file) {
-        return (file!=null && file.isFile() && file.exists() && file.canRead());
+        return (file != null && file.isFile() && file.exists() && file.canRead());
     }
 
     private static boolean validateNotIgnored(final String path) {
